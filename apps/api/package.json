@@ -15,9 +15,13 @@
   "type": "commonjs",
   "dependencies": {
     "@fastify/cors": "^11.2.0",
-    "fastify": "^5.8.5"
+    "@fullstack/types": "*",
+    "fastify": "^5.8.5",
+    "fastify-plugin": "^5.1.0",
+    "mongoose": "^9.5.0"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.11.96",
     "@types/node": "^25.6.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
