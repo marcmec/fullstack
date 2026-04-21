@@ -4,22 +4,22 @@ Sistema de monitoramento de crianças em situação de vulnerabilidade social, d
 
 ## Stack
 
-| Camada | Tecnologia | Justificativa |
-|---|---|---|
-| Frontend | Next.js 14+ com TypeScript | App Router, SSR nativo, ecossistema maduro |
-| Estilização | Tailwind CSS | Produtividade, consistência e sem CSS externo |
-| Backend | Fastify com TypeScript | Performance superior ao Express, TypeScript nativo, validação de schema embutida |
-| Banco de dados | MongoDB com Mongoose | Flexibilidade de schema para dados sociais com campos opcionais |
-| Infraestrutura | Docker + Docker Compose | Ambiente reproduzível do zero em qualquer máquina |
+| Camada         | Tecnologia                 | Justificativa                                                                    |
+| -------------- | -------------------------- | -------------------------------------------------------------------------------- |
+| Frontend       | Next.js 14+ com TypeScript | App Router, SSR nativo, ecossistema maduro                                       |
+| Estilização    | Tailwind CSS               | Produtividade, consistência e sem CSS externo                                    |
+| Backend        | Fastify com TypeScript     | Performance superior ao Express, TypeScript nativo, validação de schema embutida |
+| Banco de dados | MongoDB com Mongoose       | Flexibilidade de schema para dados sociais com campos opcionais                  |
+| Infraestrutura | Docker + Docker Compose    | Ambiente reproduzível do zero em qualquer máquina                                |
 
 ## Estrutura do projeto
 
 fullstack/
 ├── apps/
-│   ├── api/          # Fastify — porta 3001
-│   └── web/          # Next.js — porta 3000
+│ ├── api/ # Fastify — porta 3001
+│ └── web/ # Next.js — porta 3000
 ├── packages/
-│   └── types/        # Interfaces TypeScript compartilhadas
+│ └── types/ # Interfaces TypeScript compartilhadas
 ├── docker-compose.yml
 └── .env.example
 
@@ -40,6 +40,7 @@ docker compose up --build
 ```
 
 Acesse:
+
 - Frontend: http://localhost:3000
 - API: http://localhost:3001/
 

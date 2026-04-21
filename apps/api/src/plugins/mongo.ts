@@ -7,7 +7,7 @@ async function mongoPlugin(app: FastifyInstance) {
 
   try {
     await mongoose.connect(url, {
-      serverSelectionTimeoutMS: 5000
+      serverSelectionTimeoutMS: 5000,
     })
     app.log.info('MongoDB conectado com sucesso')
   } catch (err) {
@@ -21,5 +21,5 @@ async function mongoPlugin(app: FastifyInstance) {
 }
 
 export default fp(mongoPlugin, {
-  name: 'mongo'
+  name: 'mongo',
 })

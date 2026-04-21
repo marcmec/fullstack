@@ -5,7 +5,7 @@ import mongoPlugin from './plugins/mongo'
 const app = Fastify({ logger: true })
 
 app.register(cors, {
-  origin: 'http://localhost:3000'
+  origin: 'http://localhost:3000',
 })
 
 app.register(mongoPlugin)

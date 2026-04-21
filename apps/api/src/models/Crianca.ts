@@ -10,21 +10,21 @@ const CriancaSchema = new mongoose.Schema<Crianca>({
   saude: {
     ultima_consulta: String,
     vacinas_em_dia: Boolean,
-    alertas: [String]
+    alertas: [String],
   },
   educacao: {
     escola: String,
     frequencia_percent: Number,
-    alertas: [String]
+    alertas: [String],
   },
   assistencia_social: {
     cad_unico: Boolean,
     beneficio_ativo: Boolean,
-    alertas: [String]
+    alertas: [String],
   },
   revisado: { type: Boolean, default: false },
   revisado_por: String,
-  revisado_em: String
+  revisado_em: String,
 })
 
 export const CriancaModel = mongoose.model<Crianca>('Crianca', CriancaSchema)
