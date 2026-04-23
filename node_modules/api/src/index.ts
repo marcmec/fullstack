@@ -1,18 +1,6 @@
-import Fastify from 'fastify'
-import cors from '@fastify/cors'
-import mongoPlugin from './plugins/mongo'
+import { build } from './app'
 
-const app = Fastify({ logger: true })
-
-app.register(cors, {
-  origin: 'http://localhost:3000',
-})
-
-app.register(mongoPlugin)
-
-app.get('/health', async () => {
-  return { status: 'ok' }
-})
+const app = build()
 
 app.listen({ port: 3001, host: '0.0.0.0' }, (err) => {
   if (err) {
