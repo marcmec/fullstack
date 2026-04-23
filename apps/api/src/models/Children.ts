@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 import { Crianca } from '@fullstack/types'
 
-const CriancaSchema = new mongoose.Schema<Crianca>({
-  id: String,
+const ChildrenSchema = new mongoose.Schema<Crianca>({
+    id: { type: String, required: true, unique: true },
   nome: String,
   data_nascimento: String,
   bairro: String,
@@ -25,6 +25,11 @@ const CriancaSchema = new mongoose.Schema<Crianca>({
   revisado: { type: Boolean, default: false },
   revisado_por: String,
   revisado_em: String,
-})
+},
+{
+  _id: true,
+  id:false,
+}
+)
 
-export const CriancaModel = mongoose.model<Crianca>('Crianca', CriancaSchema)
+export const ChildrenModel = mongoose.model<Crianca>('Crianca', ChildrenSchema)
