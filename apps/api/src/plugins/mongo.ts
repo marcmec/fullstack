@@ -3,6 +3,11 @@ import { FastifyInstance } from 'fastify'
 import mongoose from 'mongoose'
 
 async function mongoPlugin(app: FastifyInstance) {
+  if (mongoose.connection.readyState === 1) {
+    app.log.info('MongoDB já conectado — reutilizando conexão')
+    return
+  }
+
   const url = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/fullstack'
 
   try {
