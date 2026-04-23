@@ -1,15 +1,15 @@
 import mongoose from 'mongoose'
-import { CriancaModel } from '../models/Crianca'
 import criancas from './data/seed.json'
+import { ChildrenModel } from '../models/Children'
 
 async function seed() {
   await mongoose.connect('mongodb://127.0.0.1:27017/fullstack')
   console.log('Conectado ao MongoDB')
 
-  await CriancaModel.deleteMany({})
+  await ChildrenModel.deleteMany({})
   console.log('Coleção limpa')
 
-  await CriancaModel.insertMany(criancas)
+  await ChildrenModel.insertMany(criancas)
   console.log(`${criancas.length} registros inseridos`)
 
   await mongoose.disconnect()
