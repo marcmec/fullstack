@@ -3,7 +3,8 @@ import criancas from './data/seed.json'
 import { ChildrenModel } from '../models/Children'
 
 async function seed() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/fullstack')
+  const url = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/fullstack'
+  await mongoose.connect(url)
   console.log('Conectado ao MongoDB')
 
   await ChildrenModel.deleteMany({})

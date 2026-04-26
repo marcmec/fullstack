@@ -3,6 +3,7 @@ LABEL maintainer="viniciuslag@gmail.com"
 WORKDIR /app
 
 COPY apps/api/package.json ./apps/api/
+COPY packages/types ./packages/types
 COPY package.json ./
 
 RUN npm install --workspace=apps/api
@@ -18,6 +19,8 @@ ENV NODE_ENV=production
 
 COPY --from=basebuilder /app/apps/api/dist ./dist
 COPY --from=basebuilder /app/node_modules ./node_modules
+COPY --from=basebuilder /app/apps/api/src/scripts/data ./dist/scripts/data
+COPY --from=basebuilder /app/packages/types ./packages/types
 
 EXPOSE 3001
-CMD ["node", "dist/index.js"]
+CMD ["sh", "-c", "node dist/scripts/seed.js && node dist/index.js"]
