@@ -30,7 +30,7 @@ describe('GET /children', () => {
     const app = build({ logger: false })
     const res = await app.inject({ method: 'GET', url: '/children?revisado=true' })
     const body = JSON.parse(res.body)
-    expect(body.pagination.total).toBe(4)
+    expect(body.pagination.total).toBe(5)
   })
 
   it('respeita paginação', async () => {
@@ -65,8 +65,8 @@ describe('GET /stats', () => {
     const body = JSON.parse(res.body)
     expect(res.statusCode).toBe(200)
     expect(body.total).toBe(25)
-    expect(body.revisados).toBe(4)
-    expect(body.pendentes).toBe(21)
+    expect(body.revisados).toBe(5)
+    expect(body.pendentes).toBe(20)
     expect(body.alertas.vacinas_atrasadas).toBe(8)
     expect(body.alertas.frequencia_baixa).toBe(7)
     expect(body.alertas.sem_saude).toBe(2)

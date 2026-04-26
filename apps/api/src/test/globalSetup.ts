@@ -1,5 +1,6 @@
 import type { TestProject } from 'vitest/node'
 import { MongoMemoryServer } from 'mongodb-memory-server'
+import 'dotenv/config'
 
 declare module 'vitest' {
   export interface ProvidedContext {
