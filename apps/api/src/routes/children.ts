@@ -62,15 +62,16 @@ export async function childrenRoutes(app: FastifyInstance) {
     })
 
     //adicionar JWT para obritaroiedade do endpoint
-    app.patch('/children/:id/review', async (request, reply) => {
+    app.patch('/children/:id/review'
+        , { onRequest: [app.authenticate] }, async (request, reply) => {
         const { id } = request.params as { id: string }
-        const { revisado_por } = request.body as { revisado_por: string }
+        const user= request.user as { email: string }
 
         const crianca = await ChildrenModel.findOneAndUpdate(
             { id },
             {
                 revisado: true,
-                revisado_por,
+                revisado_por: user.email,
                 revisado_em: new Date().toISOString(),
             },
             { new: true }
