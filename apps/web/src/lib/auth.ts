@@ -22,3 +22,17 @@ export async function clearAuthCookie() {
   const cookieStore = await cookies()
   cookieStore.delete(TOKEN_COOKIE)
 }
+
+export async function getCurrentUser() {
+  const token = await getAuthToken()
+  if (!token) return null
+  
+  try {
+    const payload = JSON.parse(
+      Buffer.from(token.split('.')[1], 'base64').toString()
+    )
+    return { email: payload.email as string }
+  } catch {
+    return null
+  }
+}
