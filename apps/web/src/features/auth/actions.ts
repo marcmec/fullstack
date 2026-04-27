@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { login } from '@/services/authServices'
-import { setAuthCookie } from '@/lib/auth'
+import { clearAuthCookie, setAuthCookie } from '@/lib/auth'
 import { loginSchema } from './schema'
 import { LoginActionState } from './types'
 export async function loginAction(
@@ -27,9 +27,14 @@ export async function loginAction(
   try {
     const { token } = await login(email, password)
     await setAuthCookie(token)
-  } catch (err) {
+  } catch {
     return { errors: { email: ['Credenciais inválidas'] }, message: 'Credenciais inválidas' }
   }
 
   redirect('/dashboard')
+}
+
+export async function logoutAction() {
+  await clearAuthCookie()
+  redirect('/login')
 }
