@@ -9,3 +9,14 @@ const countAlerts = (crianca: Crianca):number =>{
     ].length
 }
 export { countAlerts }
+
+export function getAlerts(c: Crianca): string[] {
+  return [
+    ...(c.saude?.alertas ?? []),
+    ...(c.educacao?.alertas ?? []),
+    ...(c.assistencia_social?.alertas ?? []),
+    ...(!c.saude ? ['sem_saude'] : []),
+    ...(!c.educacao ? ['sem_educacao'] : []),
+    ...(!c.assistencia_social ? ['sem_assistencia'] : []),
+  ]
+}

@@ -13,8 +13,9 @@ export async function getChildren(token: string, filters: ChildrenFilters = {}) 
   return fetchAPI<PaginatedResponse<Crianca>>(`/children${query}`, { token })
 }
 
-export async function getChild(token: string, id: string) {
-  return fetchAPI<{ data: Crianca }>(`/children/${id}`, { token })
+export async function getChild(token: string, id: string): Promise<{ data: Crianca }> {
+  const data = await fetchAPI<{ data: Crianca }>(`/children/${id}`, { token })
+  return data;
 }
 
 export async function getSummary(token: string) {
@@ -25,6 +26,7 @@ export async function reviewChild(token: string, id: string) {
   return fetchAPI<{ data: Crianca }>(`/children/${id}/review`, {
     method: 'PATCH',
     token,
+
   })
 }
 
@@ -39,14 +41,17 @@ export async function getCriticalCases(token: string, limit = 7) {
     .slice(0, limit)
 }
 
-
+export async function getBairros(token: string): Promise<string[]> {
+  const { data } = await getChildren(token, { limit: '100' })
+  return [...new Set(data.map(c => c.bairro))].sort()
+}
 
 // se tivesse mais tempo...
 export async function getAlertsByBairro(token: string) {
   const { data } = await getChildren(token, { limit: '100' })
-  
+
   const grouped: Record<string, Record<string, number>> = {}
-  
+
   data.forEach(c => {
     if (!grouped[c.bairro]) {
       grouped[c.bairro] = {
@@ -58,11 +63,11 @@ export async function getAlertsByBairro(token: string) {
         sem_assistencia: 0,
       }
     }
-    
+
     if (!c.saude) grouped[c.bairro].sem_saude++
     if (!c.educacao) grouped[c.bairro].sem_educacao++
     if (!c.assistencia_social) grouped[c.bairro].sem_assistencia++
-    
+
     if (c.saude?.alertas?.includes('vacinas_atrasadas')) {
       grouped[c.bairro].vacinas_atrasadas++
     }
@@ -73,7 +78,7 @@ export async function getAlertsByBairro(token: string) {
       grouped[c.bairro].beneficio_suspenso++
     }
   })
-  
+
   return Object.entries(grouped).map(([bairro, alertas]) => ({
     bairro,
     ...alertas,
