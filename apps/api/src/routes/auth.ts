@@ -35,8 +35,10 @@ export async function authRoutes(app: FastifyInstance) {
         return reply.status(401).send({ message: 'Invalid credentials' })
       }
 
-      const token = app.jwt.sign({ email }, { expiresIn: '8h' })
-
+const token = app.jwt.sign(
+  { preferred_username: email },
+  { expiresIn: '8h' }
+)
       return { token }
     }
   )

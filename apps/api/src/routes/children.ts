@@ -65,13 +65,13 @@ export async function childrenRoutes(app: FastifyInstance) {
     app.patch('/children/:id/review'
         , { onRequest: [app.authenticate] }, async (request, reply) => {
         const { id } = request.params as { id: string }
-        const user= request.user as { email: string }
+        const user = request.user as { preferred_username: string }
 
         const crianca = await ChildrenModel.findOneAndUpdate(
             { id },
             {
                 revisado: true,
-                revisado_por: user.email,
+                revisado_por: user.preferred_username,
                 revisado_em: new Date().toISOString(),
             },
             { new: true }

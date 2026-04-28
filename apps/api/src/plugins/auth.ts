@@ -2,6 +2,7 @@ import fp from 'fastify-plugin'
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 import jwt from '@fastify/jwt'
 
+
 declare module 'fastify' {
   interface FastifyInstance {
     authenticate: (request: FastifyRequest, reply: FastifyReply) => Promise<void>
@@ -10,8 +11,8 @@ declare module 'fastify' {
 
 declare module '@fastify/jwt' {
   interface FastifyJWT {
-    payload: { email: string }
-    user: { email: string }
+    payload: { preferred_username: string }
+    user: { preferred_username: string }
   }
 }
 

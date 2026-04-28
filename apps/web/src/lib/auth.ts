@@ -26,12 +26,12 @@ export async function clearAuthCookie() {
 export async function getCurrentUser() {
   const token = await getAuthToken()
   if (!token) return null
-  
+
   try {
     const payload = JSON.parse(
       Buffer.from(token.split('.')[1], 'base64').toString()
     )
-    return { email: payload.email as string }
+    return { email: payload.preferred_username }
   } catch {
     return null
   }
