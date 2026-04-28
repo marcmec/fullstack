@@ -8,14 +8,13 @@ export default async function fetchAPI<T>(
   const { token, ...rest } = options
 
   const headers: HeadersInit = {
-    'Content-Type': 'application/json',
+    ...(rest.body ? { 'Content-Type': 'application/json' } : {}),
     ...(rest.headers as Record<string, string>),
   }
 
   if (token) {
     headers.Authorization = `Bearer ${token}`
   }
-
   const res = await fetch(`${API_URL}${path}`, {
     ...rest,
     headers,
